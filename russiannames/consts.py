@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 GENDER_MALE = 1
 GENDER_FEMALE = 2
 GENDER_BOTH = 0
@@ -84,3 +85,7 @@ MIDDLENAME_POSTRULES = {
                      '^(.*)вна$' : GENDER_FEMALE,
 }
 
+NAMES_DB = 'russiannames/names_db'
+MIDNAMES_PATH = os.path.join(NAMES_DB, 'midnames.json')
+NAMES_PATH = os.path.join(NAMES_DB, 'names.json')
+SURNAMES_PATH = os.path.join(NAMES_DB, 'surnames.json')
