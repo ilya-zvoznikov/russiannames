@@ -85,7 +85,7 @@ MIDDLENAME_POSTRULES = {
                      '^(.*)вна$' : GENDER_FEMALE,
 }
 
-NAMES_DB = 'russiannames/names_db'
+NAMES_DB = os.path.join(os.path.dirname(__file__), 'names_db')
 MIDNAMES_PATH = os.path.join(NAMES_DB, 'midnames.json')
 NAMES_PATH = os.path.join(NAMES_DB, 'names.json')
 SURNAMES_PATH = os.path.join(NAMES_DB, 'surnames.json')

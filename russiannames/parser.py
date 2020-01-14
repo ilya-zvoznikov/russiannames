@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*-
 
-import sys, os.path
-from pymongo import MongoClient
 import re
 from .consts import *
 import json
@@ -32,23 +30,23 @@ def norm_name(text):
     return text.strip('.').title()
 
 
-NAMES_DB = 'names'
-
-
 class NamesParser:
     def __init__(self):
-        # self._conn = MongoClient()
-        # self._db = self._conn[NAMES_DB]
+        self._names = self.open_json_file(NAMES_PATH)
+        self._midnames = self.open_json_file(MIDNAMES_PATH)
+        self._surnames = self.open_json_file(SURNAMES_PATH)
 
-        with open(NAMES_PATH) as json_file:
-            self._names = json.load(json_file)
-        with open(MIDNAMES_PATH) as json_file:
-            self._midnames = json.load(json_file)
-        with open(SURNAMES_PATH) as json_file:
-            self._surnames = json.load(json_file)
+    @staticmethod
+    def open_json_file(filepath):
+        if not os.path.exists(filepath):
+            return
+        with open(filepath) as json_file:
+            return json.load(json_file)
 
     @staticmethod
     def findOne(dic, text):
+        if not dic:
+            return
         try:
             return dic[text]
         except KeyError:
@@ -56,12 +54,7 @@ class NamesParser:
 
     def parse(self, text):
         result = {}
-        # ncoll = self._db['names']
-        # scoll = self._db['surnames']
-        # mcoll = self._db['midnames']
-        #        parts = text.split()
         p = re.compile('\.|\s')
-        #        parts = text.split()
         parts = p.split(text)
         parts2 = list(map(norm_name, parts))
         parts = [part for part in parts2 if len(part) != 0]
@@ -205,9 +198,6 @@ class NamesParser:
 
     def classify(self, sn, fn, mn):
         result = {}
-        # scoll = self._db['surnames']
-        # ncoll = self._db['names']
-        # mcoll = self._db['midnames']
         genders = {}
         ethnics = []
         the_m = self.findOne(self._names, mn)

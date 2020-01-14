@@ -4,15 +4,14 @@ from setuptools import setup, find_packages
 
 open_as_utf = lambda x: io.open(x, encoding='utf-8')
 
-(__version__, ) = re.findall("__version__.*\s*=\s*[']([^']+)[']",
-                             open('russiannames/__init__.py').read())
+(__version__,) = re.findall("__version__.*\s*=\s*[']([^']+)[']",
+                            open('russiannames/__init__.py').read())
 
-readme = re.sub(r':members:.+|..\sautomodule::.+|:class:|:func:', '', open_as_utf('README.md').read())
+readme = re.sub(r':members:.+|..\sautomodule::.+|:class:|:func:', '',
+                open_as_utf('README.md').read())
 readme = re.sub(r'`Settings`_', '`Settings`', readme)
 readme = re.sub(r'`Contributing`_', '`Contributing`', readme)
-history = '' #re.sub(r':mod:|:class:|:func:', '', open_as_utf('HISTORY.rst').read())
-
-
+history = ''  # re.sub(r':mod:|:class:|:func:', '', open_as_utf('HISTORY.rst').read())
 
 setup(
     name='russiannames',
@@ -21,12 +20,11 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Ivan Begtin',
     author_email='ivan@begtin.tech',
-    url='https://github.com/datacoon/russiannames',
+    url='https://github.com/ilya-zvoznikov/russiannames',
     packages=find_packages(exclude=('tests', 'tests.*')),
     include_package_data=True,
     install_requires=[
         'click',
-        'pymongo',
     ],
     scripts=['bin/rusnames.py'],
     license="BSD",
@@ -44,5 +42,12 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
-    ]
+    ],
+    package_data={
+        'russiannames': [
+            'names_db/names.json',
+            'names_db/midnames.json',
+            'names_db/surnames.json',
+        ]
+    }
 )
