@@ -38,8 +38,6 @@ class NamesParser:
 
     @staticmethod
     def open_json_file(filepath):
-        if not os.path.exists(filepath):
-            return
         with open(filepath) as json_file:
             return json.load(json_file)
 

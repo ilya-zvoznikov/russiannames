@@ -2,8 +2,8 @@
 # Russian Names
 
 
-`russiannames` is a Python 3 library dedicated to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written. It uses MongoDB as backend to speed-up name parsing.
-
+`russiannames` is a Python 3 library dedicated to parse Russian names, surnames and midnames, identify person gender by fullname and how name is written.
+The library is forked from https://github.com/datacoon/russiannames and doesn't need MongoDB using.
 
 
 ## Documentation
@@ -13,12 +13,7 @@ https://russiannames.readthedocs.org/en/latest/
 
 ## Installation
 
-To install Python library use `pip install russiannames` via pip or `python setup.py install` 
-
-To use database you need MongoDB instance. 
-Unpack db_data_bson.zip file from https://github.com/datacoon/russiannames/blob/master/data/bson/db_dump_bson.zip
-
-and use `mongorestore` command to restore `names` database with 3 collections: names, surnames and midnames
+To install Python library use `pip install git+https://github.com/ilya-zvoznikov/russiannames` via pip or `python setup.py install`
 
 ## Features
 
@@ -75,7 +70,7 @@ Supports names with following ethnics identification
 
 ## Limitations
 
-* very rare names, surnames or middlenames could be not parsed 
+* very rare names, surnames or middlenames could be not parsed
 * ethnic identification is still on early stage
 
 
@@ -88,7 +83,7 @@ Supports names with following ethnics identification
 
 ### Parse name and identify gender
 
-Parses names and returns: format, surname, first name, middle name, parsed (True/False) and gender 
+Parses names and returns: format, surname, first name, middle name, parsed (True/False) and gender
 
     >>> from russiannames.parser import NamesParser
     >>> parser = NamesParser()
@@ -103,7 +98,7 @@ Gender field could have one of following values:
 * f: Female
 * u: Unknown / unidentified
 * -: Impossible to identify
-    
+
 ### Ethnic identification (experimental)
 Parses surname, first name and middle name and tries to identify person ethic affiliation of the person
 
@@ -123,7 +118,6 @@ Parses surname, first name and middle name and tries to identify person ethic af
 
 
 ## Requirements
-* pymongo
 * click
 
 
